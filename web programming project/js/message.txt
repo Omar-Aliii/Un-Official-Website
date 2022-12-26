@@ -1,0 +1,315 @@
+#include<math.h>
+#include<windows.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include<iostream>
+#include<time.h>
+
+using namespace std;
+#define pi 3.1417
+#define inc 0.003
+#define radius 9
+#define PacRadius 13
+
+
+
+static GLfloat spin=0.0;
+static float mouthSize = 0.6; // default size
+int score = 0;
+int psize = 8;
+float ghost1_x= 70;
+float ghost1_y= 270;
+float x = 0.02;
+float y= 0;
+float ghost2_x = 330;
+float ghost2_y= 520;
+float h = 0.02;
+float w = 0;
+float c = 0;
+float d = 0;
+float Pacman_x = 300;
+float Pacman_y = 300;
+boolean a = 0;
+boolean b = 0;
+int pt1x = 75;
+int pt1y = 75;
+
+
+
+
+
+void draw_pacman() {
+float theta;
+
+//body
+
+glBegin(GL_POLYGON);
+
+for(theta= 0.0; theta<= 2*pi; theta += inc){
+glColor4f(1,1,0.3,0);
+glVertex2f(Pacman_x+PacRadius*cos(theta), Pacman_y+PacRadius*sin(theta));
+}
+glEnd();
+
+//mouth
+
+glBegin(GL_POLYGON);
+glColor4f(0,0,0,0);
+glVertex2f(Pacman_x,Pacman_y);
+for(theta = -mouthSize; theta<= mouthSize; theta +=inc){
+    glVertex2d(Pacman_x+(PacRadius)*cos(theta), Pacman_y+(PacRadius)*sin(theta));
+}
+
+glEnd();
+ //change the mouth size to make it look like pacman is eating
+ if(mouthSize>0.06){
+    mouthSize-=0.0004;
+ }
+else{
+    mouthSize=0.6;
+}
+
+
+
+}
+
+void keyboard(int key, int x,int y){
+    switch(key){
+
+    case GLUT_KEY_UP:
+
+        d = -0.07;
+        c = 0;
+    break;
+    case GLUT_KEY_DOWN:
+        d = 0.07;
+        c = 0;
+    break;
+    case GLUT_KEY_LEFT:
+        d = 0;
+        c = 0.07;
+    break;
+    case GLUT_KEY_RIGHT:
+
+        d = 0;
+        c = -0.07;
+    break;
+    }
+
+}
+
+
+void draw_maze(){
+
+glColor3f(0,0,1);
+//the points of the four corners of the square to create the edges of the map
+
+glEnable(GL_POINT_SMOOTH);
+glPointSize(15);
+glBegin(GL_POINTS);
+glVertex2f(50,50);
+glVertex2f(50,550);
+glVertex2f(550,550);
+glVertex2f(550,50);
+
+glEnd();
+//creating a square to make the map of the game
+glEnable(GL_POINT_SMOOTH);
+glPointSize(10);
+glEnable(GL_POINT_SMOOTH);
+glBegin(GL_POINTS);
+glEnd();
+
+
+
+glLineWidth(15);
+glBegin(GL_LINE_STRIP);
+
+glVertex2f(50,50);
+glVertex2f(50,550);
+glVertex2f(550,550);
+glVertex2f(550,50);
+glVertex2f(50,50);
+glEnd();
+
+//creating the walls inside the map  we had created
+
+
+glLineWidth(10);
+glBegin(GL_POLYGON);
+glColor3f(0,0,1);
+glVertex2f(100,100);
+glVertex2f(100,250);
+glVertex2f(250,250);
+glVertex2f(250,100);
+glEnd();
+
+
+glLineWidth(10);
+glBegin(GL_POLYGON);
+glColor3f(0,0,1);
+glVertex2f(500,100);
+glVertex2f(500,250);
+glVertex2f(350,250);
+glVertex2f(350,100);
+glEnd();
+
+glLineWidth(10);
+glBegin(GL_POLYGON);
+glColor3f(0,0,1);
+glVertex2f(500,500);
+glVertex2f(500,350);
+glVertex2f(350,350);
+glVertex2f(350,500);
+glEnd();
+
+glLineWidth(10);
+glBegin(GL_POLYGON);
+glColor3f(0,0,1);
+glVertex2f(100,500);
+glVertex2f(100,350);
+glVertex2f(250,350);
+glVertex2f(250,500);
+glEnd();
+
+}
+
+void draw_ghosts(){
+glPointSize(17);
+glBegin(GL_POINTS);
+glColor3f(1,0,0);
+glVertex2f(ghost1_x,ghost1_y);
+glVertex2f(ghost2_x,ghost2_y);
+glEnd();
+}
+
+void draw_food() {
+    
+glColor3f(1,0.7,0);
+glPointSize(psize);
+glEnable(GL_POINT_SMOOTH);
+glBegin(GL_POINTS);
+glVertex2f(pt1x,pt1y);
+
+for(int i=pt1y; i<=520; i+=20){
+  glVertex2f(pt1x,i);
+}
+for(int i=pt1y; i<=520; i+=20){
+  glVertex2f(pt1x+455,i);
+}
+for(int i=360; i<=500; i+=20){
+  glVertex2f(pt1x+220,i);
+}
+for(int i=pt1y; i<=260; i+=20){
+  glVertex2f(pt1x+220,i);
+}
+for(int i=pt1x+20; i<=520; i+=20){
+  glVertex2f(i,pt1y);
+}
+for(int i=pt1x+20; i<=520; i+=20){
+  glVertex2f(i,pt1y+200);
+}
+for(int i=pt1x+20; i<=520; i+=20){
+  glVertex2f(i,pt1y+260);
+}
+for(int i=pt1x+20; i<=520; i+=20){
+  glVertex2f(i,520);
+}
+
+
+
+
+glEnd();
+
+}
+
+void display(){
+
+glClearColor(0,0,0,0);
+glClear(GL_COLOR_BUFFER_BIT);
+
+draw_maze();
+
+draw_ghosts();
+
+draw_food();
+
+draw_pacman();
+
+glFlush();
+
+if( Pacman_x < pt1x + 5 &&  Pacman_y < pt1y + 5){
+    pt1x = -20;
+    pt1y = -20;
+}
+
+
+ghost2_x = ghost2_x - w;
+ghost2_y = ghost2_y - h;
+if(ghost2_x < 330){
+    b = 0;
+    w = 0;
+    h = 0.08;
+}
+if(ghost2_y< 330){
+    h = 0;
+    w = -0.08;
+}
+if(ghost2_x > 520){
+    w = 0;
+    h = -0.08;
+    b = 1;
+}
+if(ghost2_x > 520 && ghost2_y > 520 && b == 1){
+    h = 0;
+    w = 0.08;
+}
+
+
+ghost1_x = ghost1_x + x;
+ghost1_y = ghost1_y - y;
+if (ghost1_y > 275){
+    a = 0;
+    y = 0;
+    x = 0.08;
+}
+if(ghost1_x> 275){
+    x = 0;
+    y = 0.08;
+}
+if(ghost1_y < 75){
+    y = 0 ;
+    x = -0.08;
+    a = 1;
+}
+if ( ghost1_x < 75 && a == 1){
+    x = 0;
+    y = -0.08;
+}
+
+Pacman_x = Pacman_x - c;
+Pacman_y = Pacman_y - d;
+
+
+
+if(Pacman_x < 65 || Pacman_x > 530 || Pacman_y < 65 || Pacman_y > 530){
+    Pacman_x = 300;
+    Pacman_y = 300;
+    c = 0;
+    d = 0;
+}
+
+glutPostRedisplay();
+}
+
+
+int main(){
+glutInitWindowPosition(100,100);
+glutInitWindowSize(600,600);
+glutCreateWindow("Pacman");
+gluOrtho2D(0,600,0,600);
+glutDisplayFunc(display);
+glutSpecialFunc(keyboard);
+glutMainLoop();
+return 0;
+}
