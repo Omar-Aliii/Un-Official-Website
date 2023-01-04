@@ -1,0 +1,168 @@
+
+
+.sec-video{
+
+background-color: black;
+}
+.background-video{
+position: relative;
+width:100%;
+
+
+}
+
+.bt-sec-video{
+
+    position: absolute;
+    color: rgb(255, 255, 255);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-weight: bold;
+    font-size:100%;
+}
+
+.logo{
+
+
+    width: 200px;
+  
+}
+.header{
+    height: 120px;
+
+background-color: rgb(0, 0, 0);
+}
+li a{
+
+    color: white;
+}
+li a :hover{
+
+   color: purple;
+
+}
+.menu1{
+    color: white;
+}
+.items{
+
+
+
+    height: 100px;
+}
+.products-title{
+
+text-transform: capitalize;
+background-color: black;
+color: white;
+margin-bottom: 0px;
+text-align: center;
+
+
+}
+.footer{
+    background-color: black;
+    height: 400px;
+    margin-top:100px
+}
+li{
+   
+}
+.footermargin{
+margin-top:150px;
+
+
+}
+.product-section{
+  margin-top: 50px;
+
+
+
+}
+.logo2{
+
+    width:100px;
+}
+.shoes{
+
+}
+
+.cards{
+    background-color: black;
+    height: 300px;
+    width: 100%;
+    margin:50px;
+ 
+    
+}
+.cards a{
+  color: white;
+
+}
+
+.balls{
+ 
+ 
+    }
+footer ul{
+
+
+    list-style: none;
+}
+    .tshirts{
+ 
+ 
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.carousel-item {
+
+    background-color: black;
+}
+
+
+.imageslide{
+
+    margin-left: 200px;
+}
+
+
+.tshirts{
+
+/*background-image: url("../images/Tshirts.jpg");
+*/
+
+}
+.balls{
+    /*
+    background-image: url("../images/Balls.jpeg");
+    */
+    
+    }
+    .shoes{
+        /*
+        background-image: url("../images/Shoes.jpg");
+        */
+    
+
+    }
+    
