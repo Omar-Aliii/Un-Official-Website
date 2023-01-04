@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class=".col-xs-4 .col-md-offset-2">
+            <div class="panel panel-default panel-info Profile">
+                <div class="panel-heading">
+                    <h2>My Profile</h2>
+                </div>
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> Profile successfully saved
+                </div>
+                <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Oops!</strong> Profile not saved. Try later.
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <form>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">First Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="firstName" placeholder="First Name"
+                                        ng-model="me.firstName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Last Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" type="text" name="lastName" placeholder="Last Name"
+                                        ng-model="me.lastName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <textarea readonly
+                                        style="width: 500px;">This text is uneditable and will appear in a textbox.</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Phone</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="phone" placeholder="xxx-xxx-xxxx"
+                                            ng-model="me.email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Address</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text" name="location" placeholder="Address"
+                                            ng-model="me.email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-primary" ng-click="updateMe()">Update</button>
+                                    </div>
+                                </div>
+                        </form>
+                    </div> <!-- end form-horizontal -->
+                </div> <!-- end panel-body -->
+
+            </div> <!-- end panel -->
+
+
+        </div> <!-- end size -->
+    </div> <!-- end container-fluid -->
+
+</body>
+
+</html>
